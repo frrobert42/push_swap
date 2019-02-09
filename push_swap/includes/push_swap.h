@@ -6,7 +6,7 @@
 /*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 11:27:13 by frrobert          #+#    #+#             */
-/*   Updated: 2019/02/07 17:50:17 by frrobert         ###   ########.fr       */
+/*   Updated: 2019/02/09 18:22:18 by towelie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@
 struct				s_node
 {
 	int				data;
+	int				i;
+	int				i_sort;
 	struct s_node	*p_next;
 	struct s_node	*p_prev;
 };
 
 typedef struct		s_dlist
 {
-	size_t			length;
+	int				length;
 	int				min;
 	int				max;
 	int				median;
@@ -59,7 +61,8 @@ void		rr(t_dlist *liste_a, t_dlist *liste_b);
 void		rra(t_dlist *liste_a);
 void		rrr(t_dlist *liste_a, t_dlist *liste_b);
 
-void		quick_sort(t_dlist *liste_a, t_dlist *liste_b);
+void		sort(t_dlist *liste_a, t_dlist *liste_b);
 int			is_sort(t_dlist *liste_a);
+int			is_sort_print(t_dlist *liste_a);
 
 #endif

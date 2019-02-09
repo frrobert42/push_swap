@@ -6,11 +6,35 @@
 /*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 13:35:15 by frrobert          #+#    #+#             */
-/*   Updated: 2019/02/07 13:19:47 by frrobert         ###   ########.fr       */
+/*   Updated: 2019/02/09 18:13:37 by towelie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void		dlist_remove_id2(struct s_node *p_temp, t_dlist *p_list)
+{
+	if (p_temp->p_prev == NULL && p_temp->p_next == NULL)
+	{
+		p_list->p_tail = p_temp->p_prev;
+		p_list->p_head = p_temp->p_next;
+	}
+	else if (p_temp->p_next == NULL)
+	{
+		p_list->p_tail = p_temp->p_prev;
+		p_list->p_tail->p_next = NULL;
+	}
+	else if (p_temp->p_prev == NULL)
+	{
+		p_list->p_head = p_temp->p_next;
+		p_list->p_head->p_prev = NULL;
+	}
+	else
+	{
+		p_temp->p_next->p_prev = p_temp->p_prev;
+		p_temp->p_prev->p_next = p_temp->p_next;
+	}
+}
 
 t_dlist		*dlist_remove_id(t_dlist *p_list, int position)
 {
@@ -25,28 +49,12 @@ t_dlist		*dlist_remove_id(t_dlist *p_list, int position)
 		{
 			if (position == i)
 			{
-				if (p_temp->p_next == NULL)
-				{
-					p_list->p_tail = p_temp->p_prev;
-					p_list->p_tail->p_next = NULL;
-				}
-				else if (p_temp->p_prev == NULL)
-				{
-					p_list->p_head = p_temp->p_next;
-					p_list->p_head->p_prev = NULL;
-				}
-				else
-				{
-					p_temp->p_next->p_prev = p_temp->p_prev;
-					p_temp->p_prev->p_next = p_temp->p_next;
-				}
+				dlist_remove_id2(p_temp, p_list);
 				free(p_temp);
 				p_list->length--;
 			}
 			else
-			{
 				p_temp = p_temp->p_next;
-			}
 			i++;
 		}
 	}
