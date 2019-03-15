@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdelahay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 14:29:58 by cdelahay          #+#    #+#             */
-/*   Updated: 2018/11/10 18:53:12 by cdelahay         ###   ########.fr       */
+/*   Created: 2018/11/12 13:53:25 by frrobert          #+#    #+#             */
+/*   Updated: 2018/11/12 13:54:42 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char			*ft_strtrim(char const *s)
+char		*ft_strtrim(char const *s)
 {
 	int		i;
 	int		len;
 	char	*str;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
 	i = -1;
 	len = ft_strlen(s);
@@ -28,14 +28,12 @@ char			*ft_strtrim(char const *s)
 		len--;
 	if (len <= 0)
 		len = 0;
-	if (!(str = (char*)malloc(sizeof(char) * len + 1)))
+	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
 		return (NULL);
-	s = s + i;
+	s += i;
 	i = -1;
 	while (++i < len)
-	{
 		str[i] = *s++;
-	}
 	str[i] = '\0';
 	return (str);
 }

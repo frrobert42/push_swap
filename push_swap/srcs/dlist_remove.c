@@ -6,7 +6,7 @@
 /*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 13:35:04 by frrobert          #+#    #+#             */
-/*   Updated: 2019/02/09 12:03:47 by towelie          ###   ########.fr       */
+/*   Updated: 2019/03/15 13:04:25 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ static void		dlist_remove2(struct s_node *p_temp, t_dlist *p_list)
 	p_list->length--;
 }
 
-
-t_dlist		*dlist_remove(t_dlist *p_list, int data)
+t_dlist			*dlist_remove(t_dlist *p_list, int data)
 {
 	struct s_node	*p_temp;
 	int				found;

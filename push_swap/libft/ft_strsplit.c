@@ -3,77 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdelahay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 16:37:04 by cdelahay          #+#    #+#             */
-/*   Updated: 2018/11/11 13:45:30 by cdelahay         ###   ########.fr       */
+/*   Created: 2018/11/12 09:26:15 by frrobert          #+#    #+#             */
+/*   Updated: 2018/11/12 10:53:22 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		nb_wd(char const *s, char c)
+static int		parts(const char *s, char c)
 {
-	int i;
-	int words;
-	int count;
+	int		i;
+	int		in_substring;
 
+	in_substring = 0;
 	i = 0;
-	words = 0;
-	count = 0;
-	if (*s != c)
-		count++;
-	while (*s)
+	while (*s != '\0')
 	{
-		if (*s == c)
-			words = 1;
-		else if (words == 1)
+		if (in_substring == 1 && *s == c)
+			in_substring = 0;
+		if (in_substring == 0 && *s != c)
 		{
-			count++;
-			words = 0;
+			in_substring = 1;
+			i++;
 		}
 		s++;
 	}
-	return (count);
+	return (i);
 }
 
-static int		word_len(char *s, char c)
+static int		ft_wlen(const char *s, char c)
 {
-	int i;
+	int		len;
 
-	i = 0;
-	while (s[i] == c && s[i] != '\0')
+	len = 0;
+	while (*s != c && *s != '\0')
+	{
+		len++;
 		s++;
-	while (s[i] != c && s[i] != '\0')
-		i++;
-	return (i);
+	}
+	return (len);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char	**words;
-	char	*word;
-	int		words_total;
-	int		words_actual;
+	char	**t;
+	int		nb_word;
 	int		i;
 
-	if (s == NULL || !(words = (char**)malloc(sizeof(char*) * nb_wd(s, c) + 1)))
-		return (NULL);
-	words_total = nb_wd(s, c);
-	words_actual = 0;
 	i = 0;
-	while (words_actual < words_total)
+	if (!s || !c)
+		return (NULL);
+	nb_word = parts((const char *)s, c);
+	t = (char **)malloc(sizeof(*t) * ((nb_word) + 1));
+	if (t == NULL)
+		return (NULL);
+	while (nb_word--)
 	{
-		if (!(word = (char*)malloc(sizeof(char) * word_len((char*)s, c) + 1)))
-			return (NULL);
-		while (*s == c && *s)
+		while (*s == c && *s != '\0')
 			s++;
-		while (*s != c && *s)
-			word[i++] = *s++;
-		word[i] = '\0';
-		words[words_actual++] = word;
-		i = 0;
+		t[i] = ft_strsub((const char *)s, 0, ft_wlen((const char *)s, c));
+		s = s + ft_wlen(s, c);
+		i++;
 	}
-	words[words_actual] = 0;
-	return (words);
+	t[i] = NULL;
+	return (t);
 }

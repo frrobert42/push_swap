@@ -6,7 +6,7 @@
 /*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 13:34:36 by frrobert          #+#    #+#             */
-/*   Updated: 2019/02/09 11:51:08 by towelie          ###   ########.fr       */
+/*   Updated: 2019/03/15 13:02:58 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ void		dlist_display(t_dlist *p_list)
 		p_temp = p_list->p_head;
 		while (p_temp != NULL)
 		{
-			printf("%d -> ", p_temp->data); // to mevove
+			ft_putnbr(p_temp->data);
+			ft_putstr(" -> ");
 			p_temp = p_temp->p_next;
 		}
 	}
-	printf("NULL\n"); // to remove
+	ft_putstr("NULL\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: towelie <frrobert@student42.fr>            +#+  +:+       +#+        */
+/*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/09 10:50:59 by towelie           #+#    #+#             */
-/*   Updated: 2019/02/09 18:35:31 by towelie          ###   ########.fr       */
+/*   Created: 2019/03/15 13:02:28 by frrobert          #+#    #+#             */
+/*   Updated: 2019/03/15 13:04:47 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int		is_sort(t_dlist *pile_a)
 
 	if (pile_a->length == 0)
 		return (-1);
+	if (pile_a->length == 1)
+		return (1);
 	p_temp = pile_a->p_head;
 	while (p_temp != NULL && p_temp->p_next != NULL)
 	{
@@ -28,16 +30,20 @@ int		is_sort(t_dlist *pile_a)
 	return (1);
 }
 
-int		is_sort_print(t_dlist *pile_a)
+int		is_rev_sort(t_dlist *pile_a)
 {
-	if (is_sort(pile_a) == 1)
-	{
-		write(1, "OK\n", 3);
+	struct s_node *p_temp;
+
+	if (pile_a->length == 0)
+		return (-1);
+	if (pile_a->length == 1)
 		return (1);
-	}
-	else
+	p_temp = pile_a->p_tail;
+	while (p_temp != NULL && p_temp->p_prev != NULL)
 	{
-		write(1, "KO\n", 3);
-		return (0);
+		if (p_temp->data > p_temp->p_prev->data)
+			return (0);
+		p_temp = p_temp->p_prev;
 	}
+	return (1);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdelahay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 15:25:43 by cdelahay          #+#    #+#             */
-/*   Updated: 2019/01/15 15:51:31 by cdelahay         ###   ########.fr       */
+/*   Created: 2018/11/12 08:54:03 by frrobert          #+#    #+#             */
+/*   Updated: 2018/11/12 10:53:00 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	get_str_len(long long n)
+static size_t	lenght(int n)
 {
 	size_t i;
 
@@ -22,24 +22,24 @@ static size_t	get_str_len(long long n)
 	return (i);
 }
 
-char			*ft_itoa(long long int n)
+char			*ft_itoa(int n)
 {
 	char			*str;
 	size_t			len;
-	long long int	n_cpy;
+	unsigned int	ntemp;
 
-	len = get_str_len(n);
-	n_cpy = n;
+	len = lenght(n);
+	ntemp = n;
 	if (n < 0)
 	{
-		n_cpy = -n;
+		ntemp = -n;
 		len++;
 	}
 	if (!(str = ft_strnew(len)))
 		return (NULL);
-	str[--len] = n_cpy % 10 + '0';
-	while (n_cpy /= 10)
-		str[--len] = n_cpy % 10 + '0';
+	str[--len] = ntemp % 10 + '0';
+	while (ntemp /= 10)
+		str[--len] = ntemp % 10 + '0';
 	if (n < 0)
 		*(str + 0) = '-';
 	return (str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdelahay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 06:36:29 by cdelahay          #+#    #+#             */
-/*   Updated: 2018/11/09 16:18:11 by cdelahay         ###   ########.fr       */
+/*   Created: 2018/11/09 13:47:21 by frrobert          #+#    #+#             */
+/*   Updated: 2018/11/16 11:12:13 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t i;
-	size_t j;
+	unsigned char	temp;
+	char			*it1;
+	char			*it2;
 
-	i = 0;
-	if (needle[0] == '\0')
-		return ((char*)haystack);
-	while (haystack[i] != '\0' && i < len)
+	if (!*needle)
+		return ((void *)haystack);
+	while (len-- && *haystack)
 	{
-		j = 0;
-		while ((haystack[i + j] == needle[j]) && (i + j < len))
+		if (*haystack == *needle)
 		{
-			j++;
-			if (needle[j] == '\0')
-				return ((char *)haystack + i);
+			temp = len;
+			it1 = (void *)haystack + 1;
+			it2 = (void *)needle + 1;
+			while (temp-- && *it1 && *it2 && *it1 == *it2)
+			{
+				++it1;
+				++it2;
+			}
+			if (!*it2)
+				return ((void *)haystack);
 		}
-		i++;
+		haystack++;
 	}
 	return (NULL);
 }

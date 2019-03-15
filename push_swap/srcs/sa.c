@@ -6,7 +6,7 @@
 /*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 10:38:08 by frrobert          #+#    #+#             */
-/*   Updated: 2019/02/07 14:47:42 by frrobert         ###   ########.fr       */
+/*   Updated: 2019/03/15 13:07:09 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 void	sa(t_dlist *pile_a)
 {
-	struct s_node	*p_begin;
-	struct s_node	*p_new_begin;
+	int		begin;
+	int		new_begin;
 
 	if (pile_a->length < 2)
 		return ;
 	else
 	{
-		p_begin = pile_a->p_head;
-		p_new_begin = p_begin->p_next;
-		p_begin->p_next = p_new_begin->p_next;
-		p_begin->p_prev = p_new_begin;
-		p_new_begin->p_prev = NULL;
-		p_new_begin->p_next = p_begin;
-		pile_a->p_head = p_new_begin;
-		pile_a->p_head->p_next = p_begin;
+		begin = pile_a->p_head->data;
+		new_begin = pile_a->p_head->p_next->data;
+		dlist_remove_id(pile_a, 1);
+		dlist_remove_id(pile_a, 1);
+		dlist_prepend(pile_a, begin);
+		dlist_prepend(pile_a, new_begin);
 	}
 }
 

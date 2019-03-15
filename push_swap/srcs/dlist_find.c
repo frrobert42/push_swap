@@ -6,7 +6,7 @@
 /*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 13:35:40 by frrobert          #+#    #+#             */
-/*   Updated: 2019/02/09 15:41:30 by towelie          ###   ########.fr       */
+/*   Updated: 2019/03/15 13:03:08 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			dlist_find_min(t_dlist *p_list, int min)
 	{
 		p_temp = p_list->p_head;
 		found = 0;
-	while (p_temp != NULL && !found)
+		while (p_temp != NULL && !found)
 		{
 			if (p_temp->data == min)
 				return (1);
@@ -31,7 +31,6 @@ int			dlist_find_min(t_dlist *p_list, int min)
 	}
 	return (0);
 }
-
 
 int			dlist_find(t_dlist *p_list, int data)
 {

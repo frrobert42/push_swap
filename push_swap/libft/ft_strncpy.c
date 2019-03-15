@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_ftstrncpy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdelahay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 19:12:35 by cdelahay          #+#    #+#             */
-/*   Updated: 2018/11/08 19:20:55 by cdelahay         ###   ########.fr       */
+/*   Created: 2018/11/08 12:42:17 by frrobert          #+#    #+#             */
+/*   Updated: 2018/11/15 10:37:44 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strncpy(char *dst, const char *src, size_t len)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	size_t length_src;
-	size_t i;
+	unsigned int index;
 
-	length_src = ft_strlen(src);
-	i = 0;
-	if (src[0] == '\0')
-		while (i < len)
-		{
-			dst[i] = '\0';
-			i++;
-		}
-	while (i < length_src && i < len)
+	index = 0;
+	while (index < n && src[index] != '\0')
 	{
-		dst[i] = src[i];
-		i++;
+		dest[index] = src[index];
+		index++;
 	}
-	while (len > length_src)
+	while (index < n)
 	{
-		dst[i] = '\0';
-		i++;
-		len--;
+		dest[index] = '\0';
+		index++;
 	}
-	if (i < len)
-		dst[i] = '\0';
-	return (dst);
+	return (dest);
 }

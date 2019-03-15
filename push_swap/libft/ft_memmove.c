@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cdelahay <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frrobert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/07 09:19:20 by cdelahay          #+#    #+#             */
-/*   Updated: 2018/11/09 17:56:05 by cdelahay         ###   ########.fr       */
+/*   Created: 2018/11/09 09:03:50 by frrobert          #+#    #+#             */
+/*   Updated: 2018/11/16 10:54:00 by frrobert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,20 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char		*dest;
-	const char	*srcs;
-	size_t		i;
+	char	*desttemp;
+	char	*srctemp;
 
-	dest = dst;
-	srcs = src;
-	i = 0;
-	if (dest > srcs)
+	if (len == 0)
+		return (dst);
+	if (dst < src)
+		return (ft_memcpy(dst, src, len));
+	if (dst > src)
 	{
-		i = len;
-		while (i > 0)
-		{
-			dest[i - 1] = srcs[i - 1];
-			i--;
-		}
-	}
-	else if (srcs > dest)
-	{
-		ft_memcpy(dest, srcs, len);
+		desttemp = (char *)dst;
+		srctemp = (char *)src;
+		while (len--)
+			desttemp[len] = srctemp[len];
+		return (dst);
 	}
 	return (dst);
 }
